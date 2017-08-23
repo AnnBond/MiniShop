@@ -1,7 +1,13 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: Anna_Bondarchuk
- * Date: 8/23/2017
- * Time: 4:16 PM
+ * route_name => [path, file, function, methods]
  */
+
+return [
+    'main_page' => [
+        'path' => '/',
+        'file' => '../src/main.php',
+        'function' => 'app\\src\\main\\index',
+        'methods' => ['GET']
+    ]
+];
