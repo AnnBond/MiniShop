@@ -17,13 +17,23 @@ function index() {
     /** @var $DBH \PDO */
     $DBH = $app['db'];
 
-    $STH = $DBH->prepare("SELECT * FROM posts");
+    if (isset($_GET['search'])) {
+        $STH = $DBH->prepare('SELECT * FROM posts WHERE title LIKE :title OR description LIKE :descr');
+        $STH->bindValue(':title', '%' . $_GET['search'] . '%');
+        $STH->bindValue(':descr', '%' . $_GET['search'] . '%');
+
+        addFlash('success', sprintf('Your search results for: ' . $_GET['search']));
+
+    } else {
+        $STH = $DBH->prepare("SELECT * FROM posts");
+    }
+
     $STH->execute();
     $posts = $STH->fetchAll();
-
-    return renderView(['layouts/default_layout.php', 'main.php'], ['posts' => $posts]);
+    return renderView(['layouts/default_layout_with_sidebar.php', 'main.php'], ['posts' => $posts]);
 }
 
-function categories() {
-
+function loginForm() {
+    return renderView(['loginForm.php']);
 }
+
