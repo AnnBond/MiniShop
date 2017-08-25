@@ -4,12 +4,12 @@
     <br>
     <div class="row">
         <p class="col-6"> Hello <?= getUserData('user')['name']; ?> !</p>
-        <!--<div class="search col-5">
+        <div class="search col-5">
             <form class="form-inline">
                 <label>Search by your posts:<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="search"></label>
                 <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
             </form>
-        </div>-->
+        </div>
     </div>
     <br>
     <div class="row">
@@ -27,8 +27,6 @@
             <h6> Your posts: </h6>
             <?php foreach ($posts as $post) :?>
                 <a href="<?= \app\core\createUrl('single_post', ['id' => $post['id']]) ?>"><?= $post['title'] ?></a>
-                <a href="<?= \app\core\createUrl('edit_post', ['id' => $post['id']]) ?>" class="deletePost">Edit post</a>
-                <a href="<?= \app\core\createUrl('delete_post', ['id' => $post['id']]) ?>" class="deletePost">Delete post</a>
                 <br>
             <?php endforeach; ?>
         </div>
