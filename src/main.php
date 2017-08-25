@@ -17,13 +17,28 @@ function index() {
     /** @var $DBH \PDO */
     $DBH = $app['db'];
 
-    $STH = $DBH->prepare("SELECT * FROM posts");
+    if (isset($_GET['search'])) {
+        $STH = $DBH->prepare('SELECT posts.*, categories.name AS category_name FROM posts LEFT JOIN categories ON categories.id=posts.category_id WHERE posts.title LIKE :title OR posts.description LIKE :descr');
+        $STH->bindValue(':title', '%' . $_GET['search'] . '%');
+        $STH->bindValue(':descr', '%' . $_GET['search'] . '%');
+
+        addFlash('success', sprintf('Your search results for: ' . $_GET['search']));
+
+    } else {
+        $STH = $DBH->prepare("SELECT posts.*, categories.name AS category_name FROM posts LEFT JOIN categories ON categories.id=posts.category_id");
+    }
+
     $STH->execute();
     $posts = $STH->fetchAll();
 
-    return renderView(['layouts/default_layout.php', 'main.php'], ['posts' => $posts]);
+    $STH = $DBH->prepare("SELECT * FROM categories");
+    $STH->execute();
+    $categories = $STH->fetchAll();
+
+    return renderView(['layouts/default_layout_with_sidebar.php', 'main.php'], ['posts' => $posts, 'categories' => $categories]);
 }
 
-function categories() {
-
+function loginForm() {
+    return renderView(['loginForm.php']);
 }
+
