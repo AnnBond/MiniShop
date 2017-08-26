@@ -27,6 +27,8 @@
             <h6> Your posts: </h6>
             <?php foreach ($posts as $post) :?>
                 <a href="<?= \app\core\createUrl('single_post', ['id' => $post['id']]) ?>"><?= $post['title'] ?></a>
+                <a href="<?= \app\core\createUrl('edit_post', ['id' => $post['id']]) ?>" class="edit">Edit</a>
+                <a href="<?= \app\core\createUrl('delete_post', ['id' => $post['id']]) ?>" class="edit">Delete</a>
                 <br>
             <?php endforeach; ?>
         </div>
