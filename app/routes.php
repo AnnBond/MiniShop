@@ -6,14 +6,14 @@
 return [
     'main_page' => [
         'path' => '/',
-        'file' => '../src/main.php',
-        'function' => 'app\\src\\main\\index',
+        'file' => '../src/controllers/main.php',
+        'function' => 'app\\src\\controllers\\main\\index',
         'methods' => ['GET']
     ],
     'single_post' => [
         'path' => '/category/post/{id}',
-        'file' => '../src/posts.php',
-        'function' => 'app\\src\\posts\\singlePost',
+        'file' => '../src/controllers/posts.php',
+        'function' => 'app\\src\\controllers\\posts\\singlePost',
         'requirements' => [
             'id' => '\d+',
             /*'name' => '[\w\s\d-]+'*/
@@ -22,68 +22,68 @@ return [
     ],
     'login' => [
         'path' => '/login/',
-        'file' => '../src/security.php',
-        'function' => 'app\\src\\security\\login',
+        'file' => '../src/controllers/security.php',
+        'function' => 'app\\src\\controllers\\security\\login',
         'methods' => ['POST']
     ],
     'registrationPage' => [
         'path' => '/registration/',
-        'file' => '../src/security.php',
-        'function' => 'app\\src\\security\\registrationPage',
+        'file' => '../src/controllers/security.php',
+        'function' => 'app\\src\\controllers\\security\\registrationPage',
         'methods' => ['GET']
     ],
     'registration' => [
         'path' => '/registration/',
-        'file' => '../src/security.php',
-        'function' => 'app\\src\\security\\registration',
+        'file' => '../src/controllers/security.php',
+        'function' => 'app\\src\\controllers\\security\\registration',
         'methods' => ['POST']
     ],
     'adminPanel' => [
         'path' => '/adminPanel/',
-        'file' => '../src/security.php',
-        'function' => 'app\\src\\security\\adminPanel',
+        'file' => '../src/controllers/security.php',
+        'function' => 'app\\src\\controllers\\security\\adminPanel',
         'methods' => ['GET', 'POST']
     ],
     'logOut' => [
         'path' => '/logOut/',
-        'file' => '../src/security.php',
-        'function' => 'app\\src\\security\\logOut',
+        'file' => '../src/controllers/security.php',
+        'function' => 'app\\src\\controllers\\security\\logOut',
         'methods' => ['GET']
     ],
     'categories' => [
         'path' => '/categories/',
-        'file' => '../src/category.php',
-        'function' => 'app\\src\\category\\index',
+        'file' => '../src/controllers/category.php',
+        'function' => 'app\\src\\controllers\\category\\index',
         'methods' => ['GET']
     ],
     'add_post_page' => [
         'path' => '/AddPost/',
-        'file' => '../src/posts.php',
-        'function' => 'app\\src\\posts\\addView',
+        'file' => '../src/controllers/posts.php',
+        'function' => 'app\\src\\controllers\\posts\\addView',
         'methods' => ['GET', 'POST']
     ],
     'add_post' => [
         'path' => '/adminPanel/AddPost/',
-        'file' => '../src/posts.php',
-        'function' => 'app\\src\\posts\\addPost',
+        'file' => '../src/controllers/posts.php',
+        'function' => 'app\\src\\controllers\\posts\\addPost',
         'methods' => ['POST']
     ],
     'edit_post' => [
         'path' => '/posts/edit/{id}',
-        'file' => '../src/posts.php',
-        'function' => 'app\\src\\posts\\editPost',
+        'file' => '../src/controllers/posts.php',
+        'function' => 'app\\src\\controllers\\posts\\editPost',
         'methods' => ['GET', 'POST']
     ],
     'delete_post' => [
         'path' => '/posts/delete/{id}',
-        'file' => '../src/posts.php',
-        'function' => 'app\\src\\posts\\deletePost',
+        'file' => '../src/controllers/posts.php',
+        'function' => 'app\\src\\controllers\\posts\\deletePost',
         'methods' => ['GET', 'POST']
     ],
     'categoryById' => [
         'path' => '/category/{id}',
-        'file' => '../src/category.php',
-        'function' => 'app\\src\\category\\categoryById',
+        'file' => '../src/controllers/category.php',
+        'function' => 'app\\src\\controllers\\category\\categoryById',
         'methods' => ['GET'],
         'requirements' => [
             'id' => '\d+',
