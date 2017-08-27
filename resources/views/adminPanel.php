@@ -3,7 +3,8 @@
     </div>
     <br>
     <div class="row">
-        <p class="col-6"> Hello <?= getUserData('user')['name']; ?> !</p>
+        <p class="col-10"> Hello <?= getUserData('user')['name']; ?> !</p>
+        <div class="userImg col-2" style="padding-left: 90px;"> <a href="#" class="personalPhoto" style=" width: 60px; height: 100%; display: inline-block;"><img src="<?= $app['user']['imgUser']; ?>" alt="" style="width: 100%; height: 100%;"></a></div>
     </div>
     <br>
     <div class="row">
@@ -26,6 +27,23 @@
                 <br>
             <?php endforeach; ?>
         </div>
-        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">User data</div>
+        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <br>
+            <form class="userData" action="<?= \app\core\createUrl('adminPanel') ?>" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Name</label>
+                    <input type="text" class="form-control" placeholder="Name" value="<?= getUserData('user')['name']; ?>" name="newUserName">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1" >Password</label>
+                    <input type="password" class="form-control" placeholder="Password" name="newUserPassword">
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlFile1">Choose your photo</label>
+                    <input type="file" class="form-control-file" name="userPhoto">
+                </div>
+                <button type="submit" class="btn btn-primary" name="updateUserData">Submit</button>
+            </form>
+        </div>
     </div>
 
