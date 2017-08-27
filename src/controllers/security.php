@@ -42,19 +42,30 @@ function registrationPage() {
 }
 
 function registration() {
+    global $app;
 
     if (!isset($_POST['userLogin']) || !isset($_POST['userPassword']) || !isset($_POST['userEmail'])) {
         addFlash('danger', 'Not enough data');
         redirect('registrationPage');
     }
     if (loadUserByUsername($_POST['userLogin'])) {
-        addFlash('danger', 'User name is busy');
+        addFlash('danger', 'User name is exist now');
         redirect('registrationPage');
     }
 
     $password = password_hash($_POST['userPassword'], PASSWORD_DEFAULT);
+    $file_name = $_FILES['newUserPhoto']['name'];
+    $file_tmp = $_FILES['newUserPhoto']['tmp_name'];
+    $file_ext = strtolower(end(explode('.', $_FILES['newUserPhoto']['name'])));
+    $expensions = array("jpeg", "jpg", "png", "svg");
 
-    User::insert(array('name' => $_POST["userLogin"], 'password' => $password, 'email' =>  $_POST["userEmail"]));
+    if (in_array($file_ext, $expensions)) {
+        move_uploaded_file($file_tmp, $app['kernel.uploads_dir'] . '/userFiles/' . DIRECTORY_SEPARATOR . $file_name);
+        $userPhoto = "/uploads/userFiles/" . $file_name;
+        addFlash('success', 'Your photo was updated');
+    }
+
+    User::insert(array('name' => $_POST["userLogin"], 'password' => $password, 'email' =>  $_POST["userEmail"], 'imgUser' => $userPhoto));
 
     persistUser(loadUserByUsername($_POST["userLogin"]));
     addFlash('success', sprintf('welcome ' . $_POST['userLogin'] ));
