@@ -17,23 +17,35 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="logo col-md-2"><a href="<?= \app\core\createUrl('main_page') ?>"><img src="/includes/shop-icon.png" alt=""></a></div>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav col-6">
-                <li class="nav-item active">
-                    <a class="nav-link" href="<?= \app\core\createUrl('main_page') ?>">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="<?= \app\core\createUrl('categories') ?>">Categories</a>
-                </li>
-            </ul>
-            <form class="form-inline">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="search">
-                <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
-            </form>
             <?php if (getUserData('user')) : ?>
-                <a href="<?= \app\core\createUrl('adminPanel') ?>" class="btn btn-success"  style="margin-left: 20px;" >AdminPanel</a>
-                <a href="<?= \app\core\createUrl('logOut') ?>" class="btn btn-info" style="margin-left: 20px;">Log out</a>
+                <ul class="navbar-nav col-4">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="<?= \app\core\createUrl('main_page') ?>">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="<?= \app\core\createUrl('categories') ?>">Categories</a>
+                    </li>
+                </ul>
+                <form class="form-inline col-4">
+                    <input class="form-control mr-sm-2 " type="text" placeholder="Search" aria-label="Search" name="search">
+                    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+                </form>
+                <a href="<?= \app\core\createUrl('adminPanel') ?>" class="btn btn-success"  style="margin: 0 35px;" >AdminPanel</a>
+                <a href="<?= \app\core\createUrl('logOut') ?>" class="btn btn-info" style="width: 95px;">Log out</a>
+                <?php elseif(!getUserData('user')): ?>
+                <ul class="navbar-nav col-7">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="<?= \app\core\createUrl('main_page') ?>">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="<?= \app\core\createUrl('categories') ?>">Categories</a>
+                    </li>
+                </ul>
+                <form class="form-inline col-4">
+                    <input class="form-control mr-sm-2 col-9" type="text" placeholder="Search" aria-label="Search" name="search">
+                    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+                </form>
             <?php endif; ?>
-            <!--<a href="" class="registration">registration</a>-->
         </div>
     </nav>
 </header>
@@ -62,6 +74,5 @@
         </div>
     </div>
 </div>
-
 </body>
 </html>

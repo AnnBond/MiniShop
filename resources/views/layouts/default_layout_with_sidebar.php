@@ -17,7 +17,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="logo col-md-2"><a href="<?= \app\core\createUrl('main_page') ?>"><img src="/includes/shop-icon.png" alt=""></a></div>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav col-6">
+            <ul class="navbar-nav col-7">
                 <li class="nav-item active">
                     <a class="nav-link" href="<?= \app\core\createUrl('main_page') ?>">Home <span class="sr-only">(current)</span></a>
                 </li>
@@ -25,15 +25,11 @@
                     <a class="nav-link active" href="<?= \app\core\createUrl('categories') ?>">Categories</a>
                 </li>
             </ul>
-            <form class="form-inline">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="search">
+            <form class="form-inline col-4">
+                <input class="form-control mr-sm-2 col-9" type="text" placeholder="Search" aria-label="Search" name="search">
                 <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
             </form>
-            <?php if (getUserData('user')) : ?>
-                <a href="<?= \app\core\createUrl('adminPanel') ?>" class="btn btn-success"  style="margin-left: 20px;" >AdminPanel</a>
-                <a href="<?= \app\core\createUrl('logOut') ?>" class="btn btn-info" style="margin-left: 20px;">Log out</a>
-            <?php endif; ?>
-            <!--<a href="" class="registration">registration</a>-->
+
         </div>
     </nav>
 </header>
@@ -61,28 +57,27 @@
             <?= $content ?>
         </div>
         <section class="sidebar col-3">
+            <?php if (getUserData('user')) : ?>
+                <a href="<?= \app\core\createUrl('adminPanel') ?>" class="btn btn-success"  style="width: 130px;" >AdminPanel</a>
+                <a href="<?= \app\core\createUrl('logOut') ?>" class="btn btn-info" style="margin-left: 20px; width: 100px;">Log out</a>
+                <br>
+            <?php endif; ?>
             <?php if (!getUserData('user')) : ?>
                 <a  href="<?= \app\core\createUrl('registrationPage') ?>" class="btn btn-success" name="registration">Registration</a>
                 <br>
                 <br>
-                <?= app\core\renderFile('../src/main.php', 'app\\src\\main\\loginForm') ?>
+                <?= app\core\renderView(['loginForm.php']) ?>
             <?php endif;?>
-
             <br>
-            <div class="row">
-                <div class="col-12">
-                    <div class="list-group" id="list-tab">
-                        <a class="list-group-item list-group-item-action active" id="list-home-list" href="<?= \app\core\createUrl('main_page') ?>">All categories</a>
-                        <?php foreach ($categories as $category) : ?>
-                            <a class="list-group-item list-group-item-action" id="list-home-list" href="<?= \app\core\createUrl('categoryById', ['id' => $category['id']]) ?>"><?= $category['name']; ?></a>
-                        <?php endforeach; ?>
-                     </div>
+            <div class="categoriesOnSidebar">
+                <div class="row">
+                    <div class="col-12">
+                        <?= app\core\renderFile('../src/controllers/category.php', 'app\\src\\controllers\\category\\listCategories') ?>
+                    </div>
                 </div>
             </div>
         </section>
     </div>
 </div>
-
-
 </body>
 </html>
