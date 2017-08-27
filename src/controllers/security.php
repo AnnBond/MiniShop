@@ -63,9 +63,39 @@ function registration() {
 
 function adminPanel() {
     global $app;
+
     $posts = Post::where('user_id', '=', $app['user']['id'])
         ->get()
         ->toArray();
+
+    $userData= getUserData('user');
+    $userId = $userData['id'];
+
+    if (isset($_POST['updateUserData'])) {
+        if (!empty($_POST['newUserName']) || !empty($_FILES)) {
+            $file_name = $_FILES['userPhoto']['name'];
+            $file_tmp = $_FILES['userPhoto']['tmp_name'];
+            $file_ext = strtolower(end(explode('.', $_FILES['userPhoto']['name'])));
+            $expensions = array("jpeg", "jpg", "png", "svg");
+            print_r($file_ext);
+            if (in_array($file_ext, $expensions)) {
+                move_uploaded_file($file_tmp, $app['kernel.uploads_dir'] . '/userFiles/' . DIRECTORY_SEPARATOR . $file_name);
+                $userData['imgUser'] = "/uploads/userFiles/" . $file_name;
+                addFlash('success', 'Your photo was updated');
+            }
+
+            $userData['name'] = $_POST['newUserName'];
+            User::where('id', '=', $userId)
+                ->update(array('name' =>  $_POST['newUserName'], 'imgUser' => $userData['imgUser']));
+        } else {
+            addFlash('warning', 'fill all inputs');
+        }
+
+        setUserData('user', $userData);
+        addFlash('success', 'Your data was updated');
+        redirect('adminPanel');
+
+    }
 
     return renderView(['layouts/default_layout.php', 'adminPanel.php'], ['posts' => $posts]);
 }
