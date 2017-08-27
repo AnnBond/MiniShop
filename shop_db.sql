@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1:3306
--- Час створення: Сер 25 2017 р., 00:47
+-- Час створення: Сер 27 2017 р., 23:28
 -- Версія сервера: 5.5.48
 -- Версія PHP: 5.4.45
 
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `posts` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `user_id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `posts`
@@ -70,7 +70,16 @@ INSERT INTO `posts` (`id`, `title`, `slug`, `description`, `cost`, `created_at`,
 (5, 'One', 'one', 'two', 20, '2017-08-24 21:13:46', 1, 0),
 (6, 'tasty burger', 'tasty-burger', 'try it', 5, '2017-08-24 21:20:52', 7, 0),
 (7, 'IT IS ADMIN POST', 'it-is-admin-post', 'ITS MINEEE', 20, '2017-08-24 21:25:27', 8, 0),
-(8, 'Second post', 'second-post', 'kjj', 100, '2017-08-24 21:32:07', 8, 0);
+(8, 'Second post', 'second-post', 'kjj', 100, '2017-08-24 21:32:07', 8, 0),
+(11, 'Car', 'car', 'dddodododd', 100000, '2017-08-26 12:41:00', 9, 3),
+(12, 'Test Posr', 'test-posr', 'cvcbvcb', 10000, '2017-08-26 15:25:44', 9, 7),
+(13, 'qqq', 'qqq', 'qqqq', 111, '2017-08-26 15:51:45', 10, 3),
+(14, '111', '111', '1111', 111, '2017-08-26 16:16:14', 11, 5),
+(15, '111', '111', '1111', 1111, '2017-08-26 17:22:14', 11, 3),
+(16, '222', '222', '2222', 2222, '2017-08-26 17:32:29', 11, 3),
+(17, 'vvv', 'vvv', 'cf', 22, '2017-08-26 17:43:52', 11, 5),
+(18, 'test post', 'test-post', 'test', 100, '2017-08-27 10:23:24', 12, 7),
+(19, 'My first test post', 'my-first-test-post', 'qqqq', 100, '2017-08-27 20:18:17', 13, 9);
 
 -- --------------------------------------------------------
 
@@ -84,15 +93,19 @@ CREATE TABLE IF NOT EXISTS `users` (
   `password` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `imgUser` varchar(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `password`, `email`, `imgUser`) VALUES
-(8, 'Admin', '$2y$10$W.ruQ578CPH.onLiFKmLpeyEdf7cYkI9DyMKm2sSVxxc/fS1j0ZWa', 'admin@admin.admin', ''),
-(9, 'SecondAdmin', '$2y$10$nJUbRRdyZcYxTwx64urD0ONgEHbcUzlN9cL778idMY0F6VyBb7h/2', 'Admin', '');
+(8, 'Admin', '$2y$10$W.ruQ578CPH.onLiFKmLpeyEdf7cYkI9DyMKm2sSVxxc/fS1j0ZWa', 'admin@admin.admin', '/uploads/userFiles/Atom_symbol_as_used_in_the_logo_of_the_television_series_The_Big_Bang_Theory_(black).svg.png'),
+(9, 'SecondAdmin', '$2y$10$nJUbRRdyZcYxTwx64urD0ONgEHbcUzlN9cL778idMY0F6VyBb7h/2', 'Admin', ''),
+(10, 'qqq', '$2y$10$eJT4Hg9O6FBQuKZ90RDWOebLmrzmicbiLxouYpPxUcWR0M75uaN1W', 'qqq', ''),
+(11, 'www', '$2y$10$ggv1GKtraVyT2PxeDYw/OeA1mop3NkcCawOROZGKb/IFKt1PkXWhy', 'www', ''),
+(12, 'Test', '$2y$10$0GiEgqeyuedwFXCLpSuwieWl6OT4R62.iWuXvoYaRcx13YZzC9LM.', 'test@test.com', '/uploads/userFiles/ukladka-na-korotkiye-volosy-s-volnami-v-khaotichnom-stile.jpg'),
+(13, 'Ann', '$2y$10$.mtyQlR2TCeAWYqeS4tD5.7D0sgJR8dYAqyAjI.AjdKCAQcajMsLe', 'Ann', '/uploads/userFiles/Nike-Logo-PNG-Transp.png');
 
 --
 -- Індекси збережених таблиць
@@ -129,12 +142,12 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT для таблиці `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT для таблиці `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
