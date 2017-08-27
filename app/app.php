@@ -9,6 +9,15 @@ include '../core/flash_messages.php';
 include '../exceptions/HttpNotFoundException.php';
 include '../exceptions/RuntimeException.php';
 
+use Illuminate\Database\Capsule\Manager as Capsule;
+
+include '../vendor/autoload.php';
+
+$capsule = new Capsule;
+
+$capsule->setAsGlobal();
+$capsule->bootEloquent();
+
 // Configuring
 $app = [
     'kernel.root_dir' => dirname(dirname(__FILE__))
@@ -26,6 +35,5 @@ $app['config']  = require $app['kernel.app_dir'] . DIRECTORY_SEPARATOR . 'config
 $app['routes']  = require $app['kernel.app_dir'] . DIRECTORY_SEPARATOR . 'routes.php';
 $app['user']  = require $app['kernel.app_dir'] . DIRECTORY_SEPARATOR . 'user.php';
 
-
-$app['db'] = new PDO("mysql:host={$app['config']['db_host']};dbname={$app['config']['db_name']}", $app['config']['db_username'], $app['config']['db_password']);
-$app['db']->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+/*$app['db'] = new PDO("mysql:host={$app['config']['db_host']};dbname={$app['config']['db_name']}", $app['config']['db_username'], $app['config']['db_password']);
+$app['db']->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );*/
