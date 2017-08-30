@@ -1,7 +1,15 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ANN
- * Date: 8/30/2017
- * Time: 11:00 PM
- */
+include '../app/app.php';
+
+use app\src\models\User;
+
+$faker = Faker\Factory::create();
+
+for ($i = 1; $i <= 5; $i++) {
+    $users = new User();
+    $users->name = $faker->text(10);
+    $users->password = password_hash('Admin', PASSWORD_BCRYPT);
+    $users->email = $faker->text(30);
+    $users->imgUser = '/uploads/userFiles/shop-icon.png';
+    $users->save();
+}
