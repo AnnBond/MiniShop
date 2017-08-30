@@ -9,7 +9,7 @@
                             <p class="date"><?= $post['created_at'] ?></p>
                             <h4 class="card-title"><?= $post['title'] ?></h4>
                             <p class="cost"><?= $post['cost'] . "$" ?></p>
-                            <p class="cost">Category: <?= $post['category_name'] ?></p>
+                            <p class="cost">Category: <a href="<?= \app\core\createUrl('categoryById', ['id' => $post['category_id']]) ?>" class="card-title"><?php print_r($post['category_name']); ?></a></p>
 
                             <p class="card-text">Description: <?php print_r($post['description']); ?></p>
                             <a href="?=buy" class="btn btn-primary">Buy</a>
