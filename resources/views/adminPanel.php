@@ -19,13 +19,22 @@
     </div>
     <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <br>
             <h6> Your posts: </h6>
+            <br>
+            <div class="row">
             <?php foreach ($posts as $post) :?>
-                <a href="<?= \app\core\createUrl('single_post', ['id' => $post['id']]) ?>"><?= $post['title'] ?></a>
-                <a href="<?= \app\core\createUrl('edit_post', ['id' => $post['id']]) ?>" class="edit">Edit</a>
-                <a href="<?= \app\core\createUrl('delete_post', ['id' => $post['id']]) ?>" class="edit">Delete</a>
-                <br>
+            <div class="card col-4">
+                <div class="card-body">
+                    <h6><a href="<?= \app\core\createUrl('single_post', ['id' => $post['id']]) ?>"><?= $post['title'] ?></a></h6>
+                    <br>
+                    <a href="<?= \app\core\createUrl('edit_post', ['id' => $post['id']]) ?>" class="btn btn-success edit">Edit</a>
+                    <a href="<?= \app\core\createUrl('delete_post', ['id' => $post['id']]) ?>" class="btn btn-danger edit">Delete</a>
+                    <br>
+                </div>
+            </div>
             <?php endforeach; ?>
+            </div>
         </div>
         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
             <br>
