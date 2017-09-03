@@ -19,10 +19,12 @@ function listCategories() {
 }
 
 function categoryById($categoryId) {
+    print_r($categoryId);
     if (isset($_GET['search'])) {
         $posts = Post::where('category_id', '=', $categoryId)
             ->where('posts.title', 'LIKE', '%' . $_GET['search'] . '%')
-            ->orWhere('posts.description', 'LIKE', '%' . $_GET['search'] . '%')
+            ->orwhere('category_id', '=', $categoryId)
+            ->where('posts.description', 'LIKE', '%' . $_GET['search'] . '%')
             ->leftjoin('categories', function ($join)
             {
                 $join->on('categories.id', '=', 'posts.category_id');
@@ -31,6 +33,8 @@ function categoryById($categoryId) {
             ->orderBy('created_at', 'desc')
             ->get()
             ->toArray();
+
+        print_r($posts);
 
         addFlash('success', sprintf('Your search results for: ' . $_GET['search']));
 
