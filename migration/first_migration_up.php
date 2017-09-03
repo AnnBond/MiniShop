@@ -15,15 +15,6 @@ Capsule::schema()->create('posts', function (Illuminate\Database\Schema\Blueprin
     $table->integer('category_id');
 });
 
-Capsule::schema()->create('users1', function (Illuminate\Database\Schema\Blueprint $table) {
-    // Auto-increment id
-    $table->increments('id');
-    $table->string('name');
-    $table->string('password');
-    $table->string('email');
-    $table->integer('imgUser');
-});
-
 Capsule::schema()->create('categories', function (Illuminate\Database\Schema\Blueprint $table) {
     // Auto-increment id
     $table->increments('id');

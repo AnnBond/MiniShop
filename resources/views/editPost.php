@@ -12,6 +12,6 @@
             <label for="exampleFormControlTextarea1">Description</label>
             <textarea class="form-control" rows="3" placeholder="Some interesting..." name="description"><?= $post['description'] ?></textarea>
         </div>
-        <button type="submit" class="submit" name="edit">Submit</button>
+        <button type="submit" class="submit btn btn-success" name="edit">Submit</button>
     </form>
 </section>
