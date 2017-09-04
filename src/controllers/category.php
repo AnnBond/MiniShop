@@ -33,8 +33,6 @@ function categoryById($categoryId) {
             ->get()
             ->toArray();
 
-        print_r($posts);
-
         addFlash('success', sprintf('Your search results for: ' . $_GET['search']));
 
     } else {
