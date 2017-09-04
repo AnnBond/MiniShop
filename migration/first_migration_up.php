@@ -28,6 +28,6 @@ Capsule::schema()->create('users', function (Illuminate\Database\Schema\Blueprin
     $table->string('name')->unique();
     $table->string('password');
     $table->string('email')->unique();
-    $table->string('imgUser');
+    $table->string('imgUser')->nullable();
 });
 
