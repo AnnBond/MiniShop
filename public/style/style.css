@@ -12,3 +12,7 @@
     padding: 10px;
     border-radius: .25rem;
 }
+
+.author {
+    text-align: right;
+}
