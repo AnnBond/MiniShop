@@ -69,7 +69,7 @@ function addPost() {
             redirect('main_page');
         } else {
             addFlash('warning', 'fill all inputs');
-            redirect('adminPanel');
+            redirect('add_post_page');
         }
     }
 
