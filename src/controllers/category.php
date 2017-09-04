@@ -19,7 +19,6 @@ function listCategories() {
 }
 
 function categoryById($categoryId) {
-    print_r($categoryId);
     if (isset($_GET['search'])) {
         $posts = Post::where('category_id', '=', $categoryId)
             ->where('posts.title', 'LIKE', '%' . $_GET['search'] . '%')
