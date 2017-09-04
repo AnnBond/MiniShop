@@ -44,7 +44,7 @@ function registrationPage() {
 function registration() {
     global $app;
 
-    if (!isset($_POST['userLogin']) || !isset($_POST['userPassword']) || !isset($_POST['userEmail'])) {
+    if (empty($_POST['userLogin']) || empty($_POST['userPassword']) || empty($_POST['userEmail'])) {
         addFlash('danger', 'Not enough data');
         redirect('registrationPage');
     }
