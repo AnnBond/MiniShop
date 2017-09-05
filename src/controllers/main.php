@@ -11,6 +11,8 @@ use app\src\models\Categories;
 use app\src\models\Post;
 
 function index() {
+    $posts = Post::all();
+
     if (isset($_GET['search'])) {
         $posts = Post::where('posts.title', 'LIKE', '%' . $_GET['search'] . '%')
             ->orWhere('posts.description', 'LIKE', '%' . $_GET['search'] . '%')
