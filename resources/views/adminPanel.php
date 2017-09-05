@@ -23,9 +23,11 @@
             <h6> Your posts: </h6>
             <br>
             <div class="row">
+               <!-- --><?php /*print_r($posts)*/?>
             <?php foreach ($posts as $post) :?>
             <div class="card col-4">
                 <div class="card-body">
+                    <p><?php print_r($post["posts_by_user"][0]['title'])?></p>
                     <h6><a href="<?= \app\core\createUrl('single_post', ['id' => $post['id']]) ?>"><?= $post['title'] ?></a></h6>
                     <br>
                     <a href="<?= \app\core\createUrl('edit_post', ['id' => $post['id']]) ?>" class="btn btn-success edit">Edit</a>
