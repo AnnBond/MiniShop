@@ -15,7 +15,7 @@
                             <a href="?=buy" class="btn btn-primary">Buy</a>
                         </div>
                         <div class="author col-2">
-                            <p class="cost">Author: <br><?= $post['user_name'] ?></p>
+                            <p class="cost">Author: <?php print_r($post['author']['name'] )?></p>
                             <div class="userImg">
                                 <a href="#" class="personalPhoto" style=" width: 60px; height: 100%; display: inline-block;"><img src="<?= $user['imgUser']; ?>" alt="" style="width: 100%; height: 100%;"></a>
                             </div>
