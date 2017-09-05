@@ -26,12 +26,7 @@ function index() {
         addFlash('success', sprintf('Your search results for: ' . $_GET['search']));
 
     } else {
-        $posts = Post::leftjoin('categories', function ($join)
-        {
-            $join->on('categories.id', '=', 'posts.category_id');
-        } )
-            ->select('posts.*', 'categories.name as category_name')
-            ->orderBy('created_at', 'desc')
+        $posts = Post::with('author')->orderBy('created_at', 'desc')
             ->get()
             ->toArray();
     }
