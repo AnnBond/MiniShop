@@ -1,5 +1,5 @@
 <div class="registrationForm">
-    <form method="post" action="<?= \app\core\createUrl('registration') ?>" enctype="multipart/form-data">
+    <form method="post" action="<?= \app\core\createUrl('registration') ?>" enctype="multipart/form-data" class="registration">
         <div class="form-group">
             <label for="exampleInputEmail1">Login</label>
             <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name="userLogin">
