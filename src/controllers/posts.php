@@ -13,7 +13,7 @@ use app\src\models\User;
  * */
 function singlePost($id) {
 
-    $post = Post::where('posts.id', '=', $id)
+    $post = Post::with('author', 'category')->where('posts.id', '=', $id)
         ->leftjoin('categories', function ($join)
     {
         $join->on('categories.id', '=', 'posts.category_id');
