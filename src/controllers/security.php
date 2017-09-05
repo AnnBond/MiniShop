@@ -75,7 +75,7 @@ function registration() {
 function adminPanel() {
     global $app;
 
-    $posts = Post::where('user_id', '=', $app['user']['id'])
+    $posts = User::with('postsByUser') /*Post::where('user_id', '=', $app['user']['id'])*/
         ->get()
         ->toArray();
 
