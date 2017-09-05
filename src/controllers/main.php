@@ -11,8 +11,6 @@ use app\src\models\Categories;
 use app\src\models\Post;
 
 function index() {
-    $posts = Post::all();
-
     if (isset($_GET['search'])) {
         $posts = Post::where('posts.title', 'LIKE', '%' . $_GET['search'] . '%')
             ->orWhere('posts.description', 'LIKE', '%' . $_GET['search'] . '%')
@@ -28,7 +26,7 @@ function index() {
         addFlash('success', sprintf('Your search results for: ' . $_GET['search']));
 
     } else {
-        $posts = Post::with('author')->orderBy('created_at', 'desc')
+        $posts = Post::with('author', 'category')->orderBy('created_at', 'desc')
             ->get()
             ->toArray();
     }
