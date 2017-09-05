@@ -36,7 +36,7 @@ function categoryById($categoryId) {
         addFlash('success', sprintf('Your search results for: ' . $_GET['search']));
 
     } else {
-        $posts = Post::where('category_id', '=', $categoryId)->leftjoin('categories', function ($join)
+        $posts = Post::with('author', 'category')->where('category_id', '=', $categoryId)->leftjoin('categories', function ($join)
         {
             $join->on('categories.id', '=', 'posts.category_id');
         } )
