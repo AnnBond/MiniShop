@@ -1,5 +1,5 @@
 <div class="loginForm">
-    <form method="post" action="<?= \app\core\createUrl('login') ?>">
+    <form method="post" action="<?= \app\core\createUrl('login') ?>" class="login">
         <div class="form-group">
             <label for="exampleInputEmail1">Login</label>
             <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name="userName">
