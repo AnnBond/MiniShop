@@ -66,7 +66,7 @@
                 <a  href="<?= \app\core\createUrl('registrationPage') ?>" class="btn btn-success" name="registration">Registration</a>
                 <br>
                 <br>
-                <?= app\core\renderView(['loginForm.php']) ?>
+                <?= app\core\renderView(['main/loginForm.php']) ?>
             <?php endif;?>
             <br>
             <div class="categoriesOnSidebar">
