@@ -8,24 +8,21 @@ use app\src\models\Post;
 use app\src\models\Categories;
 use app\src\models\User;
 
-/*
- * Single post
- * */
 function singlePost($id) {
-
-    $post = Post::with('author', 'category')->where('posts.id', '=', $id)
+    $post = Post::with('author', 'category')
+        ->where('posts.id', '=', $id)
         ->get()
         ->toArray();
 
     $users = User::all()->toArray();
-    return renderView(['layouts/default_layout.php', 'singlePost.php'], ['post' => current($post), 'users' => $users]);
+    return renderView(['layouts/default_layout.php', 'posts/singlePost.php'], ['post' => current($post), 'users' => $users]);
 }
 
 function addView() {
     $categories = Categories::all()
         ->toArray();
 
-    return renderView(['layouts/default_layout.php', 'addPost.php'], ['categories' => $categories]);
+    return renderView(['layouts/default_layout.php', 'posts/addPost.php'], compact('categories'));
 }
 
 
@@ -46,7 +43,7 @@ function editPost($id) {
         }
     }
 
-    return renderView(['layouts/default_layout.php', 'editPost.php'], ['post' => $post]);
+    return renderView(['layouts/default_layout.php', 'posts/editPost.php'], compact('post'));
 }
 
 function addPost() {
@@ -57,21 +54,21 @@ function addPost() {
             Post::insert(array('title' => $_POST["title"], 'description' => $_POST["description"], 'cost' =>  $_POST["cost"], 'slug' => createSlug($_POST["title"]), 'user_id' => $app['user']['id'], 'category_id' => $_POST["category_id"]));
 
             addFlash('success', 'Your post was added');
-            redirect('main_page');
+            redirect('adminPanel');
         } else {
             addFlash('warning', 'fill all inputs');
             redirect('add_post_page');
         }
     }
 
-    return renderView(['layouts/default_layout.php', 'adminPanel.php']);
+    return renderView(['layouts/default_layout.php', 'security/adminPanel.php']);
 }
 
 function deletePost($id) {
     Post::where('id', '=', $id)
         ->delete();
     addFlash('success', 'Your post was deleted');
-    redirect('main_page');
+    redirect('adminPanel');
 }
 
 /**
