@@ -10,7 +10,8 @@ Capsule::schema()->create('posts', function (Illuminate\Database\Schema\Blueprin
     $table->string('slug');
     $table->string('description');
     $table->integer('cost');
-    $table->timestamps();
+    $table->timestamp('created_at')->useCurrent();
+    $table->timestamp('updated_at')->useCurrent();
     $table->integer('user_id');
     $table->integer('category_id');
 });
