@@ -9,11 +9,18 @@ $faker = Faker\Factory::create();
 
 for ($i = 1; $i <= 10; $i++) {
     $users = new User();
-    $users->name = $faker->text(10);
+    $users->name = $faker->unique()->text(10);
     $users->password = password_hash('Admin', PASSWORD_BCRYPT);
-    $users->email = $faker->email(30);
+    $users->email = $faker->unique()->email(30);
     $users->imgUser = '/uploads/userFiles/shop-icon.png';
     $users->save();
+}
+
+for ($i = 1; $i <= 10; $i++) {
+    $categories = new Categories();
+    $categories->name = $faker->unique()->text(10);
+    $categories->description = $faker->text(200);
+    $categories->save();
 }
 
 for ($i = 1; $i <= 15; $i++) {
@@ -22,14 +29,8 @@ for ($i = 1; $i <= 15; $i++) {
     $post->slug = $faker->text(40);
     $post->description = $faker->text(200);
     $post->cost = $faker->biasedNumberBetween(100, 2000);
-    $post->user_id = $faker->biasedNumberBetween(1, 5);
-    $post->category_id = $faker->biasedNumberBetween(1, 10);
+    $post->user_id = User::all()->random()->id;
+    $post->category_id = Categories::all()->random()->id;
     $post->save();
 }
 
-for ($i = 1; $i <= 10; $i++) {
-    $categories = new Categories();
-    $categories->name = $faker->text(10);
-    $categories->description = $faker->text(200);
-    $categories->save();
-}
