@@ -3,19 +3,18 @@ namespace app\src\controllers\category;
 
 use function app\core\renderView;
 use function app\core\addFlash;
-use function app\core\redirect;
 
 use app\src\models\Categories;
 use app\src\models\Post;
 
 function index() {
     $categories = Categories::all()->toArray();
-    return renderView(['layouts/default_layout.php', 'category.php'], ['categories' => $categories]);
+    return renderView(['layouts/default_layout.php', 'category/category.php'], compact('categories'));
 }
 
 function listCategories() {
     $categories = Categories::all()->toArray();
-    return renderView(['listCategories.php'], ['categories' => $categories]);
+    return renderView(['category/listCategories.php'], compact('categories'));
 }
 
 function categoryById($categoryId) {
@@ -31,15 +30,12 @@ function categoryById($categoryId) {
         addFlash('success', sprintf('Your search results for: ' . $_GET['search']));
 
     } else {
-        $posts = Post::with('author', 'category')->where('category_id', '=', $categoryId)->leftjoin('categories', function ($join)
-        {
-            $join->on('categories.id', '=', 'posts.category_id');
-        } )
-            ->select('posts.*', 'categories.name as category_name')
+        $posts = Post::with('author', 'category')
+            ->where('category_id', '=', $categoryId)
             ->orderBy('created_at', 'desc')
             ->get()
             ->toArray();
     }
 
-    return renderView(['layouts/default_layout_with_sidebar.php', 'main.php'], ['posts' => $posts]);
+    return renderView(['layouts/default_layout_with_sidebar.php', 'main/main.php'], compact('posts'));
 }
