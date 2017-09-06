@@ -8,7 +8,6 @@ use function app\core\persistUser;
 
 use app\core;
 
-use app\src\models\Post;
 use app\src\models\User;
 
 function login() {
@@ -38,7 +37,7 @@ function loadUserByUsername($username) {
 }
 
 function registrationPage() {
-    return renderView(['layouts/default_layout.php', 'registration.php']);
+    return renderView(['layouts/default_layout.php', 'security/registration.php']);
 }
 
 function registration() {
@@ -78,6 +77,8 @@ function adminPanel() {
     $posts = User::with('postsByUser')
         ->where('id', '=', $app['user']['id'])
         ->get()
+        ->first()
+        ->postsByUser
         ->toArray();
 
     $userData= getUserData('user');
@@ -89,7 +90,6 @@ function adminPanel() {
             $file_tmp = $_FILES['userPhoto']['tmp_name'];
             $file_ext = strtolower(end(explode('.', $_FILES['userPhoto']['name'])));
             $expensions = array("jpeg", "jpg", "png", "svg");
-            print_r($file_ext);
             if (in_array($file_ext, $expensions)) {
                 move_uploaded_file($file_tmp, $app['kernel.uploads_dir'] . '/userFiles/' . DIRECTORY_SEPARATOR . $file_name);
                 $userData['imgUser'] = "/uploads/userFiles/" . $file_name;
@@ -109,7 +109,7 @@ function adminPanel() {
 
     }
 
-    return renderView(['layouts/default_layout.php', 'adminPanel.php'], ['posts' => $posts]);
+    return renderView(['layouts/default_layout.php', 'security/adminPanel.php'], compact('posts')); // compact
 }
 
 function logOut() {
