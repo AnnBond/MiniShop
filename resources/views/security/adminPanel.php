@@ -23,7 +23,7 @@
             <h6> Your posts: </h6>
             <br>
             <div class="row">
-            <?php foreach ($posts[0]['posts_by_user'] as $post) :?>
+            <?php foreach ($posts as $post) :?>
             <div class="card col-4">
                 <div class="card-body">
                     <h6><a href="<?= \app\core\createUrl('single_post', ['id' => $post['id']]) ?>"><?= $post['title'] ?></a></h6>
