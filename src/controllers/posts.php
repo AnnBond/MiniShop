@@ -17,14 +17,6 @@ function singlePost($id) {
     return renderView(['layouts/default_layout.php', 'posts/singlePost.php'], ['post' => current($post)]);
 }
 
-function addView() {
-    $categories = Categories::all()
-        ->toArray();
-
-    return renderView(['layouts/default_layout.php', 'posts/addPost.php'], compact('categories'));
-}
-
-
 function editPost($id) {
     $post = Post::all()
         ->where('id', '=', $id)
@@ -48,6 +40,9 @@ function editPost($id) {
 function addPost() {
     global $app;
 
+    $categories = Categories::all()
+        ->toArray();
+
     if (isset($_POST['addPost'])) {
         if (!empty($_POST['title']) && !empty($_POST['description']) && !empty($_POST['cost'])) {
             Post::insert(array('title' => $_POST["title"], 'description' => $_POST["description"], 'cost' =>  $_POST["cost"], 'slug' => createSlug($_POST["title"]), 'user_id' => $app['user']['id'], 'category_id' => $_POST["category_id"]));
@@ -55,12 +50,15 @@ function addPost() {
             addFlash('success', 'Your post was added');
             redirect('adminPanel');
         } else {
+            $title = $_POST['title'];
+            $description = $_POST['description'];
+            $cost = $_POST['cost'];
+            $cat = $_POST["category_id"];
             addFlash('warning', 'fill all inputs');
-            redirect('add_post_page');
         }
     }
 
-    return renderView(['layouts/default_layout.php', 'security/adminPanel.php']);
+    return renderView(['layouts/default_layout.php', 'posts/addPost.php'] , compact('categories', 'title', 'description', 'cost', 'cat'));
 }
 
 function deletePost($id) {
