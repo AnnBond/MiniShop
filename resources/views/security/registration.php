@@ -14,7 +14,7 @@
         </div>
         <div class="form-group">
             <label for="exampleFormControlFile1">Choose your photo</label>
-            <input type="file" class="form-control-file" name="newUserPhoto">
+            <input type="file" class="form-control-file" name="userPhoto">
         </div>
         <button type="submit" class="btn btn-primary" name="registration">Submit</button>
     </form>
