@@ -56,17 +56,11 @@ return [
         'function' => 'app\\src\\controllers\\category\\index',
         'methods' => ['GET']
     ],
-    'add_post_page' => [
-        'path' => '/AddPost/',
-        'file' => '../src/controllers/posts.php',
-        'function' => 'app\\src\\controllers\\posts\\addView',
-        'methods' => ['GET', 'POST']
-    ],
     'add_post' => [
         'path' => '/adminPanel/AddPost/',
         'file' => '../src/controllers/posts.php',
         'function' => 'app\\src\\controllers\\posts\\addPost',
-        'methods' => ['POST']
+        'methods' => ['GET', 'POST']
     ],
     'edit_post' => [
         'path' => '/posts/edit/{id}',
