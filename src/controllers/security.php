@@ -5,6 +5,7 @@ use function app\core\renderView;
 use function app\core\addFlash;
 use function app\core\redirect;
 use function app\core\persistUser;
+use function app\core\processUpload;
 
 use app\core;
 
@@ -41,7 +42,6 @@ function registrationPage() {
 }
 
 function registration() {
-    global $app;
 
     if (empty($_POST['userLogin']) || empty($_POST['userPassword']) || empty($_POST['userEmail'])) {
         addFlash('danger', 'Not enough data');
@@ -53,22 +53,14 @@ function registration() {
     }
 
     $password = password_hash($_POST['userPassword'], PASSWORD_DEFAULT);
-    $file_name = $_FILES['newUserPhoto']['name'];
-    $file_tmp = $_FILES['newUserPhoto']['tmp_name'];
-    $file_ext = strtolower(end(explode('.', $_FILES['newUserPhoto']['name'])));
-    $expensions = array("jpeg", "jpg", "png", "svg");
-
-    if (in_array($file_ext, $expensions)) {
-        move_uploaded_file($file_tmp, $app['kernel.uploads_dir'] . '/userFiles/' . DIRECTORY_SEPARATOR . $file_name);
-        $userPhoto = $app['kernel.uploadsUsers_dir'] . DIRECTORY_SEPARATOR . $file_name;
-        addFlash('success', 'Your photo was updated');
-    }
+    $userPhoto = processUpload();
 
     User::insert(array('name' => $_POST["userLogin"], 'password' => $password, 'email' =>  $_POST["userEmail"], 'imgUser' => $userPhoto));
 
     persistUser(loadUserByUsername($_POST["userLogin"]));
     addFlash('success', sprintf('welcome ' . $_POST['userLogin'] ));
     redirect('main_page');
+
 }
 
 function adminPanel() {
@@ -81,25 +73,16 @@ function adminPanel() {
         ->postsByUser
         ->toArray();
 
-    $userData= getUserData('user');
+    $userData = getUserData('user');
     $userId = $userData['id'];
 
     if (isset($_POST['updateUserData'])) {
         if (!empty($_POST['newUserName']) || !empty($_FILES)) {
-            $file_name = $_FILES['userPhoto']['name'];
-            $file_tmp = $_FILES['userPhoto']['tmp_name'];
-            $file_ext = strtolower(end(explode('.', $_FILES['userPhoto']['name'])));
-            $expensions = array("jpeg", "jpg", "png", "svg");
-            if (in_array($file_ext, $expensions)) {
-                move_uploaded_file($file_tmp, $app['kernel.uploads_dir'] . '/userFiles/' . DIRECTORY_SEPARATOR . $file_name);
-                $userData['imgUser'] = $app['kernel.uploadsUsers_dir'] . DIRECTORY_SEPARATOR . $file_name;
-                /*$userData['imgUser'] = uploadPath();*/
-                addFlash('success', 'Your photo was updated');
-            }
+                $userData['imgUser'] = processUpload();
+                $userData['name'] = $_POST['newUserName'];
 
-            $userData['name'] = $_POST['newUserName'];
             User::where('id', '=', $userId)
-                ->update(array('name' =>  $_POST['newUserName'], 'imgUser' => $userData['imgUser']));
+                ->update(array('name' =>  $_POST['newUserName'], 'imgUser' => processUpload()));
         } else {
             addFlash('warning', 'fill all inputs');
         }
