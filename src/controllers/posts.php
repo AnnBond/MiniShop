@@ -14,8 +14,7 @@ function singlePost($id) {
         ->get()
         ->toArray();
 
-    $users = User::all()->toArray();
-    return renderView(['layouts/default_layout.php', 'posts/singlePost.php'], ['post' => current($post), 'users' => $users]);
+    return renderView(['layouts/default_layout.php', 'posts/singlePost.php'], ['post' => current($post)]);
 }
 
 function addView() {
