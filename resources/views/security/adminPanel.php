@@ -1,5 +1,5 @@
     <div class="row">
-        <a href="<?= \app\core\createUrl('add_post_page') ?>" class="btn btn-success col-12">Add post</a>
+        <a href="<?= \app\core\createUrl('add_post') ?>" class="btn btn-success col-12">Add post</a>
     </div>
     <br>
     <div class="row">
