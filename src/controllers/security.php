@@ -60,7 +60,7 @@ function registration() {
 
     if (in_array($file_ext, $expensions)) {
         move_uploaded_file($file_tmp, $app['kernel.uploads_dir'] . '/userFiles/' . DIRECTORY_SEPARATOR . $file_name);
-        $userPhoto = "/uploads/userFiles/" . $file_name;
+        $userPhoto = $app['kernel.uploadsUsers_dir'] . DIRECTORY_SEPARATOR . $file_name;
         addFlash('success', 'Your photo was updated');
     }
 
@@ -92,7 +92,8 @@ function adminPanel() {
             $expensions = array("jpeg", "jpg", "png", "svg");
             if (in_array($file_ext, $expensions)) {
                 move_uploaded_file($file_tmp, $app['kernel.uploads_dir'] . '/userFiles/' . DIRECTORY_SEPARATOR . $file_name);
-                $userData['imgUser'] = "/uploads/userFiles/" . $file_name;
+                $userData['imgUser'] = $app['kernel.uploadsUsers_dir'] . DIRECTORY_SEPARATOR . $file_name;
+                /*$userData['imgUser'] = uploadPath();*/
                 addFlash('success', 'Your photo was updated');
             }
 
