@@ -70,6 +70,7 @@ function getUserAgent() {
 
 function processUpload() {
     global $app;
+    $userData= getUserData('user');
 
     $file = $_FILES['userPhoto']['name'];
     $file_tmp = $_FILES['userPhoto']['tmp_name'];
@@ -78,7 +79,8 @@ function processUpload() {
 
     if (in_array($file_ext, $expansions)) {
         move_uploaded_file($file_tmp, $app['kernel.uploads_dir'] . DIRECTORY_SEPARATOR . $file);
-
-        return $app['kernel.uploadsUsers_dir'] . DIRECTORY_SEPARATOR . $file;
+        $url = $app['kernel.uploadsUsers_dir'] . DIRECTORY_SEPARATOR . $file;
+        return $url;
     }
+    return $userData['imgUser'];
 }
