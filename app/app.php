@@ -28,7 +28,8 @@ $app = array_merge($app, [
     'kernel.src_dir' => $app['kernel.root_dir'] . DIRECTORY_SEPARATOR . 'src',
     'kernel.app_dir' => $app['kernel.root_dir'] . DIRECTORY_SEPARATOR . 'app',
     'kernel.services_dir' => $app['kernel.root_dir'] . DIRECTORY_SEPARATOR . 'services',
-    'kernel.uploads_dir' => $app['kernel.root_dir'] . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR . 'uploads'
+    'kernel.uploads_dir' => $app['kernel.root_dir'] . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR . 'uploads',
+    'kernel.uploadsUsers_dir' => DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . 'userFiles'
 ]);
 
 $app['config']  = require $app['kernel.app_dir'] . DIRECTORY_SEPARATOR . 'config.php';
