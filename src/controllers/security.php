@@ -53,9 +53,8 @@ function registration() {
     }
 
     $password = password_hash($_POST['userPassword'], PASSWORD_DEFAULT);
-    $userPhoto = processUpload();
 
-    User::insert(array('name' => $_POST["userLogin"], 'password' => $password, 'email' =>  $_POST["userEmail"], 'imgUser' => $userPhoto));
+    User::insert(array('name' => $_POST["userLogin"], 'password' => $password, 'email' =>  $_POST["userEmail"], 'imgUser' =>  processUpload()));
 
     persistUser(loadUserByUsername($_POST["userLogin"]));
     addFlash('success', sprintf('welcome ' . $_POST['userLogin'] ));
@@ -78,7 +77,6 @@ function adminPanel() {
 
     if (isset($_POST['updateUserData'])) {
         if (!empty($_POST['newUserName']) || !empty($_FILES)) {
-                $userData['imgUser'] = processUpload();
                 $userData['name'] = $_POST['newUserName'];
 
             User::where('id', '=', $userId)
