@@ -1,0 +1,26 @@
+{
+  "name": "vendor_name/package_name",
+  "description": "description_text",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Ann",
+      "email": "ann@example.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "app\\core\\": "core/",
+      "app\\src\\controllers\\": "src/controllers/",
+      "app\\src\\models\\": "src/models/"
+    }
+  },
+  "require": {
+    "illuminate/database": "^5.4",
+    "fzaninotto/faker": "^1.7"
+  },
+  "require-dev": {
+    "codeception/codeception": "^2.3"
+  }
+}
